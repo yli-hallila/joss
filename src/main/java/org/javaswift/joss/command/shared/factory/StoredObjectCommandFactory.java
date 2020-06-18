@@ -11,6 +11,7 @@ import org.javaswift.joss.command.shared.object.DownloadObjectToFileCommand;
 import org.javaswift.joss.command.shared.object.ObjectInformationCommand;
 import org.javaswift.joss.command.shared.object.ObjectMetadataCommand;
 import org.javaswift.joss.command.shared.object.UploadObjectCommand;
+import org.javaswift.joss.command.shared.object.UploadArchiveCommand;
 import org.javaswift.joss.headers.Header;
 import org.javaswift.joss.instructions.DownloadInstructions;
 import org.javaswift.joss.instructions.UploadInstructions;
@@ -41,8 +42,11 @@ public interface StoredObjectCommandFactory {
     ObjectMetadataCommand createObjectMetadataCommand(Account account, Container container,
                                                       StoredObject object, Collection<? extends Header> headers);
 
-    UploadObjectCommand createUploadObjectCommand(Account account, Container container,
-                                                  StoredObject target, UploadInstructions uploadInstructions);
+    UploadObjectCommand createUploadObjectCommand(Account account, Container container, StoredObject target,
+                                                  UploadInstructions uploadInstructions);
+
+    UploadArchiveCommand createUploadArchiveCommand(Account account, Container container, StoredObject target,
+                                                     UploadInstructions uploadInstructions, String archiveType);
 
     String getTempUrlPrefix();
 

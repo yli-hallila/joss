@@ -20,6 +20,7 @@ import org.javaswift.joss.command.shared.object.DownloadObjectToFileCommand;
 import org.javaswift.joss.command.shared.object.ObjectInformationCommand;
 import org.javaswift.joss.command.shared.object.ObjectMetadataCommand;
 import org.javaswift.joss.command.shared.object.UploadObjectCommand;
+import org.javaswift.joss.command.shared.object.UploadArchiveCommand;
 import org.javaswift.joss.headers.Header;
 import org.javaswift.joss.instructions.DownloadInstructions;
 import org.javaswift.joss.instructions.UploadInstructions;
@@ -27,6 +28,7 @@ import org.javaswift.joss.model.Account;
 import org.javaswift.joss.model.Container;
 import org.javaswift.joss.model.StoredObject;
 import org.javaswift.joss.swift.Swift;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class StoredObjectCommandFactoryMock implements StoredObjectCommandFactory {
 
@@ -74,6 +76,11 @@ public class StoredObjectCommandFactoryMock implements StoredObjectCommandFactor
     @Override
     public UploadObjectCommand createUploadObjectCommand(Account account, Container container, StoredObject target, UploadInstructions uploadInstructions) {
         return new UploadObjectCommandMock(swift, account, container, target, uploadInstructions);
+    }
+
+    @Override
+    public UploadArchiveCommand createUploadArchiveCommand(Account account, Container container, StoredObject target, UploadInstructions uploadInstructions, String archiveType) {
+        throw new NotImplementedException();
     }
 
     @Override

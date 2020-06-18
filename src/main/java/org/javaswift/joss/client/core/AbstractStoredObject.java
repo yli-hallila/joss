@@ -227,6 +227,23 @@ public abstract class AbstractStoredObject extends AbstractObjectStoreEntity<Obj
         uploadObject(new UploadInstructions(fileToUpload));
     }
 
+    public void uploadArchive(File archiveToUpload, String archiveType) {
+        uploadArchive(new UploadInstructions(archiveToUpload), archiveType);
+    }
+
+    public void uploadArchive(UploadInstructions uploadInstructions, String archiveType) {
+        if (uploadInstructions.requiresSegmentation()) {
+            throw new RuntimeException("Segmented archive uploads not supported");
+        } else {
+            directlyUploadArchive(uploadInstructions, archiveType);
+        }
+        invalidate();
+    }
+
+    public void directlyUploadArchive(UploadInstructions uploadInstructions, String archiveType) {
+        commandFactory.createUploadArchiveCommand(getAccount(), getContainer(), this, uploadInstructions, archiveType).call();
+    }
+
     public void delete() {
         commandFactory.createDeleteObjectCommand(getAccount(), getContainer(), this).call();
     }

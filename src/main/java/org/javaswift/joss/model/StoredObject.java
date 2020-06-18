@@ -93,6 +93,14 @@ public interface StoredObject extends ObjectStoreEntity, Comparable<DirectoryOrO
     void uploadObject(File fileToUpload);
 
     /**
+     * Uploads an archive from a designated location to a location designated by the Container and
+     * the object.
+     * @param archiveToUpload the file containing the content that must be uploaded to the object
+     * @param archiveType the archive type, valid types are: tar, tar.gz and tar.bz2
+     */
+    void uploadArchive(File archiveToUpload, String archiveType);
+
+    /**
     * Deletes an object in a container. In combination with copyObject, this is effectively the "Best Practice'
     * move method.
     */

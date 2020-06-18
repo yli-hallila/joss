@@ -12,6 +12,7 @@ import org.javaswift.joss.command.impl.object.DownloadObjectToFileCommandImpl;
 import org.javaswift.joss.command.impl.object.ObjectInformationCommandImpl;
 import org.javaswift.joss.command.impl.object.ObjectMetadataCommandImpl;
 import org.javaswift.joss.command.impl.object.UploadObjectCommandImpl;
+import org.javaswift.joss.command.impl.object.UploadArchiveCommandImpl;
 import org.javaswift.joss.command.shared.factory.StoredObjectCommandFactory;
 import org.javaswift.joss.command.shared.object.CopyObjectCommand;
 import org.javaswift.joss.command.shared.object.DeleteObjectCommand;
@@ -21,6 +22,7 @@ import org.javaswift.joss.command.shared.object.DownloadObjectToFileCommand;
 import org.javaswift.joss.command.shared.object.ObjectInformationCommand;
 import org.javaswift.joss.command.shared.object.ObjectMetadataCommand;
 import org.javaswift.joss.command.shared.object.UploadObjectCommand;
+import org.javaswift.joss.command.shared.object.UploadArchiveCommand;
 import org.javaswift.joss.headers.Header;
 import org.javaswift.joss.instructions.DownloadInstructions;
 import org.javaswift.joss.instructions.UploadInstructions;
@@ -75,6 +77,11 @@ public class StoredObjectCommandFactoryImpl implements StoredObjectCommandFactor
     @Override
     public UploadObjectCommand createUploadObjectCommand(Account account, Container container, StoredObject target, UploadInstructions uploadInstructions) {
         return new UploadObjectCommandImpl(account, getHttpClient(), getAccess(), target, uploadInstructions);
+    }
+
+    @Override
+    public UploadArchiveCommand createUploadArchiveCommand(Account account, Container container, StoredObject target, UploadInstructions uploadInstructions, String archiveType) {
+        return new UploadArchiveCommandImpl(account, getHttpClient(), getAccess(), target, uploadInstructions, archiveType);
     }
 
     @Override
